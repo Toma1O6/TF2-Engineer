@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "DPD",
+        "I I"
+    ],
+    "key": {
+        "D": {
+            "item": "minecraft:iron_trapdoor"
+        },
+        "P": {
+            "item": "minecraft:ender_pearl"
+        },
+        "I": {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    "result": {
+        "item": "tf2engineer:teleporter"
+    }
+}

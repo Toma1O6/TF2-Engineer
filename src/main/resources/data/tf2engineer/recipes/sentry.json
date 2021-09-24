@@ -1,0 +1,28 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "COD",
+        " B ",
+        "I I"
+    ],
+    "key": {
+        "C": {
+            "item": "minecraft:chest"
+        },
+        "O": {
+            "item": "minecraft:observer"
+        },
+        "D": {
+            "item": "minecraft:dispenser"
+        },
+        "B": {
+            "item": "minecraft:iron_block"
+        },
+        "I": {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    "result": {
+        "item": "tf2engineer:sentry"
+    }
+}

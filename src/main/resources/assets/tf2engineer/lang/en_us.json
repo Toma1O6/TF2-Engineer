@@ -1,0 +1,17 @@
+{
+    "block.tf2engineer.dispenser": "Dispenser",
+    "block.tf2engineer.teleporter": "Teleporter",
+
+    "item.tf2engineer.wrench": "Wrench",
+    "item.tf2engineer.sentry": "Sentry",
+
+    "itemGroup.tf2.engineer": "Engineer mod",
+
+    "container.wrench": "Wrench",
+
+    "sentry.target.all": "All",
+    "sentry.target.hostile": "Hostile",
+    "sentry.target.player": "Player",
+
+    "sentry.screen.unknown_player": "Offline player"
+}

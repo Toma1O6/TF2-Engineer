@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " G ",
+        "BID",
+        " I "
+    ],
+    "key": {
+        "G": {
+            "item": "minecraft:glass"
+        },
+        "B": {
+            "item": "minecraft:brewing_stand"
+        },
+        "D": {
+            "item": "minecraft:dispenser"
+        },
+        "I": {
+            "item": "minecraft:iron_block"
+        }
+    },
+    "result": {
+        "item": "tf2engineer:dispenser"
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "  I",
+        " II",
+        "S  "
+    ],
+    "key": {
+        "S": {
+            "item": "minecraft:stick"
+        },
+        "I": {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    "result": {
+        "item": "tf2engineer:wrench"
+    }
+}
