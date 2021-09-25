@@ -119,6 +119,14 @@ public class SentryEntity extends MobEntity implements ILiquidIronStorage, IEnti
 
     @Override
     public int insertIron(int amount) {
+        int health = (int) getHealth();
+        int maxHealth = (int) getMaxHealth();
+        int missing = maxHealth - health;
+        if (missing > 0) {
+            int heal = amount / 100;
+            heal(heal);
+            amount -= heal * 100;
+        }
         int over = Math.max(0, liquidIron + amount - IRON_CAPACITY);
         setIronVolume(liquidIron + amount);
         return over;
@@ -129,6 +137,12 @@ public class SentryEntity extends MobEntity implements ILiquidIronStorage, IEnti
         int extract = Math.min(amount, liquidIron);
         setIronVolume(liquidIron - amount);
         return extract;
+    }
+
+    @Override
+    public int getRequestAmount() {
+        int healDiff = (int) (getMaxHealth() - getHealth());
+        return 300 - liquidIron + healDiff * 100;
     }
 
     public boolean hasAmmo() {
@@ -150,6 +164,10 @@ public class SentryEntity extends MobEntity implements ILiquidIronStorage, IEnti
 
     @Override
     public void push(double p_70024_1_, double p_70024_3_, double p_70024_5_) {
+    }
+
+    public void playShootSound() {
+        level.playSound(null, this, Sounds.SENTRY_SHOOT, SoundCategory.MASTER, 1.0F, 1.0F);
     }
 
     public boolean isOwner(UUID uuid) {

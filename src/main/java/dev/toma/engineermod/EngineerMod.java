@@ -11,6 +11,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * This mod is supposed to add few features from TF2 character - Engineer.
@@ -33,6 +35,11 @@ public class EngineerMod {
      * Unique ID for mod identification
      */
     public static final String MODID = "tf2engineer";
+
+    /**
+     * The mod's logger
+     */
+    public static final Logger LOGGER = LogManager.getLogger("TF2-Engineer-Buildings-Mod");
 
     /**
      * Mod constructor

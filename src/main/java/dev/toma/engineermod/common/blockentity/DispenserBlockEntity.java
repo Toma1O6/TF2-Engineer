@@ -2,7 +2,9 @@ package dev.toma.engineermod.common.blockentity;
 
 import dev.toma.engineermod.common.ILiquidIronStorage;
 import dev.toma.engineermod.common.init.BlockEntities;
+import dev.toma.engineermod.common.init.Entities;
 import dev.toma.engineermod.util.Mth;
+import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -21,6 +23,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Block entity defining behaviour of dispensers. Adds Regeneration I effect to all nearby entities
@@ -34,7 +37,7 @@ public class DispenserBlockEntity extends InventoryHandlerBlockEntity implements
     /**
      * Range for Regeneration I effect
      */
-    private static final int RANGE = 5;
+    private static final int RANGE = 4;
 
     /**
      * Squared {@link DispenserBlockEntity#RANGE}
@@ -130,6 +133,11 @@ public class DispenserBlockEntity extends InventoryHandlerBlockEntity implements
     }
 
     @Override
+    public int getRequestAmount() {
+        return 250;
+    }
+
+    @Override
     protected void write(CompoundNBT nbt) {
         nbt.putInt("liquidIron", liquidIron);
     }
@@ -158,7 +166,8 @@ public class DispenserBlockEntity extends InventoryHandlerBlockEntity implements
      */
     private void addEffectToAllAround() {
         if (!level.isClientSide && level.getDayTime() % 60L == 0L) {
-            List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, VoxelShapes.block().move(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ()).bounds().inflate(RANGE));
+            Predicate<LivingEntity> predicate = entity -> !entity.isSpectator() && entity.getType() != Entities.SENTRY.get();
+            List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, VoxelShapes.block().move(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ()).bounds().inflate(RANGE), predicate);
             list.forEach(this::addRegenerationEffect);
         }
     }

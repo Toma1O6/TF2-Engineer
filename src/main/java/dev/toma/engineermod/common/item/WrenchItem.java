@@ -96,7 +96,7 @@ public class WrenchItem extends Item {
         if (entity instanceof ILiquidIronStorage) {
             ILiquidIronStorage storage = (ILiquidIronStorage) entity;
             int total = getIronVolume(stack);
-            int insertTarget = Math.min(total, 300);
+            int insertTarget = Math.min(total, storage.getRequestAmount());
             int extra = storage.insertIron(insertTarget);
             int consumed = insertTarget - extra;
             consumeIronVolume(stack, consumed);

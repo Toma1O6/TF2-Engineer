@@ -1,9 +1,9 @@
 package dev.toma.engineermod.common.block;
 
 import dev.toma.engineermod.EngineerMod;
+import dev.toma.engineermod.common.TeleporterLinkManager;
 import dev.toma.engineermod.common.blockentity.TeleporterBlockEntity;
 import dev.toma.engineermod.common.init.ModdedItems;
-import dev.toma.engineermod.util.TeleporterLink;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -12,10 +12,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -77,9 +79,9 @@ public class TeleporterBlock extends Block {
     public ActionResultType use(BlockState state, World level, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult traceResult) {
         ItemStack stack = player.getItemInHand(hand);
         if (stack.getItem() == ModdedItems.WRENCH && !level.isClientSide) {
-            TeleporterLink.IResult result = TeleporterLink.get().link(level, pos);
+            TeleporterLinkManager.ILinkResult result = TeleporterLinkManager.addLinkNode(player, pos);
             if (result.isValid()) {
-                linkTiles(level, result);
+                linkTiles(level, result, player);
             }
         }
         return ActionResultType.PASS;
@@ -101,7 +103,7 @@ public class TeleporterBlock extends Block {
      * @param level Level
      * @param result Linking result
      */
-    private void linkTiles(World level, TeleporterLink.IResult result) {
+    private void linkTiles(World level, TeleporterLinkManager.ILinkResult result, PlayerEntity player) {
         BlockPos a = result.getNodeA();
         BlockPos b = result.getNodeB();
         TileEntity source = level.getBlockEntity(a);
@@ -112,6 +114,9 @@ public class TeleporterBlock extends Block {
                 TeleporterBlockEntity tileB = (TeleporterBlockEntity) target;
                 tileA.linkTo(b);
                 tileB.linkTo(a);
+                if (!level.isClientSide) {
+                    player.sendMessage(new TranslationTextComponent("teleporter.link.success"), Util.NIL_UUID);
+                }
             }
         }
     }

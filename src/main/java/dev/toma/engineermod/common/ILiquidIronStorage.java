@@ -30,4 +30,9 @@ public interface ILiquidIronStorage {
      * @return Actual amount of extracted iron
      */
     int extractIron(int amount);
+
+    /**
+     * @return How much fluid is required for internal operations.
+     */
+    int getRequestAmount();
 }

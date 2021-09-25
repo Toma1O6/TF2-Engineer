@@ -71,7 +71,6 @@ public final class CommonRegistrationHandler {
                 newSound("sentry_shoot"),
                 newSound("sentry_acquire_target"),
                 newSound("teleporter_send"),
-                newSound("teleporter_spin"),
                 newSound("dispenser_heal"),
                 newSound("wrench_hit_build_success"),
                 newSound("wrench_swing")

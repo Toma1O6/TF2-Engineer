@@ -18,7 +18,6 @@ public final class Sounds {
     public static final SoundEvent SENTRY_SHOOT = null;
     public static final SoundEvent SENTRY_ACQUIRE_TARGET = null;
     public static final SoundEvent TELEPORTER_SEND = null;
-    public static final SoundEvent TELEPORTER_SPIN = null;
     public static final SoundEvent DISPENSER_HEAL = null;
     public static final SoundEvent WRENCH_HIT_BUILD_SUCCESS = null;
     public static final SoundEvent WRENCH_SWING = null;

@@ -5,7 +5,10 @@
     "item.tf2engineer.wrench": "Wrench",
     "item.tf2engineer.sentry": "Sentry",
 
-    "itemGroup.tf2.engineer": "Engineer mod",
+    "itemGroup.tf2.engineer": "Engineer Mod",
+
+    "entity.tf2engineer.sentry": "Sentry Gun",
+    "entity.tf2engineer.sentry_bullet": "Sentry Bullet",
 
     "container.wrench": "Wrench",
 
@@ -13,5 +16,7 @@
     "sentry.target.hostile": "Hostile",
     "sentry.target.player": "Player",
 
-    "sentry.screen.unknown_player": "Offline player"
+    "sentry.screen.unknown_player": "Offline player",
+
+    "teleporter.link.success": "Link created successfully"
 }

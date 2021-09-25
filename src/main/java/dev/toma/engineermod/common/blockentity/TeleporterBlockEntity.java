@@ -57,10 +57,6 @@ public class TeleporterBlockEntity extends TileEntity implements ITickableTileEn
             --teleportDelay;
             return;
         }
-        if (level.getGameTime() % 55L == 0L) {
-            BlockPos pos = worldPosition;
-            level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), Sounds.TELEPORTER_SPIN, SoundCategory.MASTER, 1.0F, 1.0F);
-        }
         if (linkedDest == null || teleportTarget == null)
             return;
         if (validateOn(teleportTarget)) {

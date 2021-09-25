@@ -61,6 +61,7 @@ public final class EngineerModClient {
      */
     private void assignRenderLayers() {
         RenderTypeLookup.setRenderLayer(ModdedBlocks.TELEPORTER, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModdedBlocks.DISPENSER, RenderType.cutout());
     }
 
     /**

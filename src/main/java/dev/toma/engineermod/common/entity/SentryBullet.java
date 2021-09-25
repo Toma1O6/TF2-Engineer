@@ -40,7 +40,7 @@ public class SentryBullet extends ProjectileEntity {
 
     public SentryBullet(World level, SentryEntity owner) {
         this(Entities.SENTRY_BULLET.get(), level);
-        setPos(owner.getX(), owner.getEyeY() + 0.2, owner.getZ());
+        setPos(owner.getX(), owner.getEyeY(), owner.getZ());
     }
 
     public void shoot(float xRot, float yRot, float velocity, float inaccuracy) {

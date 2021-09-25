@@ -1,0 +1,23 @@
+[TOMA]
+--- CAN'T FIX
+- ALL: Sound doesn't incrementally get quieter with distance, it's either all or nothing when you reach its max distance. -VANILLA SOUND SYSTEM
+
+--- DONE
+- Rename to "TF2 Engineer Buildings Mod"
+- Wrench: Doesn't accept iron blocks as metal.
+- Wrench: Shift clicking stack of ingots into wrench crashes game.
+- Wrench: Putting multiple ingots into wrench only raises metal level by 1 ingot's worth.
+- Teleporter: Print message to console on sucessful teleporter linking.
+- Dispenser: change radius to 3 blocks.
+- Dispenser: prevent placing of blocks on second block of dispenser height.
+- Sentry: Doesn't heal when whacked with the wrench. Should be 1 heart per 100 mb of metal.
+- Sentry: Should not be healed by the dispenser (is it even possible to exclude it from being healed like this?).
+- Sentry: Bullet spread should be tighter, make it 100% accurate.
+- Sentry: Change bullet origin to barrel muzzle.
+- Sentry: Rename "entity.tf2engineer.sentry" to "Sentry Gun" if possible.
+- Sentry: Should be targeted by hostile mobs.
+- Teleporter: Remove idle sound from teleporters because that's actually annoying now that I see it in action.
+- Dispenser: fix black textures in world model.
+- Update wrench model
+- Update teleporter model
+- Update sentry model

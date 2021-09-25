@@ -4,7 +4,6 @@
     "sentry_shoot": { "category": "master", "sounds": [{ "name": "tf2engineer:sentry_shoot", "stream": true }]},
     "sentry_acquire_target": { "category": "master", "sounds": [{ "name": "tf2engineer:sentry_acquire_target", "stream": true }]},
     "teleporter_send": { "category": "master", "sounds": [{ "name": "tf2engineer:teleporter_send", "stream": true }]},
-    "teleporter_spin": { "category": "master", "sounds": [{ "name": "tf2engineer:teleporter_spin", "stream": true }]},
     "dispenser_heal": { "category": "master", "sounds": [{ "name": "tf2engineer:dispenser_heal", "stream": true }]},
     "wrench_hit_build_success": { "category": "master", "sounds": [{ "name": "tf2engineer:wrench_hit_build_success", "stream": true }]},
     "wrench_swing": { "category": "master", "sounds": [{ "name": "tf2engineer:wrench_swing", "stream": true }]}

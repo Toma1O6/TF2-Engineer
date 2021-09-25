@@ -13,6 +13,7 @@ import net.minecraft.inventory.container.IContainerListener;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.ServerPlayNetHandler;
 import net.minecraft.network.play.server.SSetSlotPacket;
@@ -27,8 +28,9 @@ import net.minecraftforge.common.Tags;
  */
 public class WrenchContainer extends Container {
 
-    public static final int INGOT_VOLUME = 180;
     public static final int NUGGET_VOLUME = 20;
+    public static final int INGOT_VOLUME = 9 * NUGGET_VOLUME;
+    public static final int BLOCK_VOLUME = 9 * INGOT_VOLUME;
 
     /**
      * Single slot inventory for iron resource inputs
@@ -67,12 +69,20 @@ public class WrenchContainer extends Container {
     }
 
     @Override
-    public boolean stillValid(PlayerEntity player) {
-        return true;
+    public ItemStack quickMoveStack(PlayerEntity player, int index) {
+        Slot slot = slots.get(index);
+        if (slot != null && slot.hasItem() && index > 0) {
+            ItemStack stack = slot.getItem();
+            if (!moveItemStackTo(stack, 0, 1, false)) {
+                return ItemStack.EMPTY;
+            }
+        }
+        return ItemStack.EMPTY;
     }
 
-    public ItemStack getControlStack() {
-        return stack;
+    @Override
+    public boolean stillValid(PlayerEntity player) {
+        return true;
     }
 
     private void clearInventory() {
@@ -80,11 +90,13 @@ public class WrenchContainer extends Container {
             ItemStack input = simpleInventory.getItem(0);
             if (!input.isEmpty()) {
                 Item in = input.getItem();
-                int count = stack.getCount();
+                int count = input.getCount();
                 if (in.is(Tags.Items.INGOTS_IRON)) {
                     WrenchItem.growIronVolume(stack, INGOT_VOLUME * count);
                 } else if (in.is(Tags.Items.NUGGETS_IRON)) {
                     WrenchItem.growIronVolume(stack, NUGGET_VOLUME * count);
+                } else if (in == Items.IRON_BLOCK) {
+                    WrenchItem.growIronVolume(stack, BLOCK_VOLUME * count);
                 }
                 if (owner instanceof ServerPlayerEntity) {
                     ServerPlayerEntity serverPlayer = (ServerPlayerEntity) owner;
@@ -105,7 +117,6 @@ public class WrenchContainer extends Container {
             if (!ItemStack.matches(itemstack1, itemstack)) {
                 boolean clientStackChanged = !itemstack1.equals(itemstack, true);
                 ItemStack itemstack2 = itemstack.copy();
-                //this.lastSlots.set(i, itemstack2);
                 if (clientStackChanged) {
                     netHandler.send(new SSetSlotPacket(containerId, i, itemstack2));
                 }
@@ -115,7 +126,7 @@ public class WrenchContainer extends Container {
 
     private static boolean isValidInput(ItemStack stack) {
         Item item = stack.getItem();
-        return item.is(Tags.Items.INGOTS_IRON) || item.is(Tags.Items.NUGGETS_IRON);
+        return item == Items.IRON_BLOCK || item.is(Tags.Items.INGOTS_IRON) || item.is(Tags.Items.NUGGETS_IRON);
     }
 
     private static class ContainerListener implements IContainerListener {

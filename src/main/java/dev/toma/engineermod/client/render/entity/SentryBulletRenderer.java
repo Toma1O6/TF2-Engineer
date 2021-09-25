@@ -38,6 +38,7 @@ public class SentryBulletRenderer extends EntityRenderer<SentryBullet> {
 
     @Override
     public void render(SentryBullet bullet, float yaw, float partial, MatrixStack poseStack, IRenderTypeBuffer renderBuffer, int light) {
+        if (bullet.tickCount == 0) return;
         poseStack.pushPose();
         poseStack.mulPose(Vector3f.YP.rotationDegrees(MathHelper.lerp(partial, bullet.yRotO, bullet.yRot) - 90.0F));
         poseStack.mulPose(Vector3f.ZP.rotationDegrees(MathHelper.lerp(partial, bullet.xRotO, bullet.xRot)));

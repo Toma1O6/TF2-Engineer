@@ -24,7 +24,7 @@ license="GNU GPLv3"
     version="${file.jarVersion}" #mandatory
 
      # A display name for the mod
-    displayName="Engineer mod" #mandatory
+    displayName="TF2 Engineer Buildings Mod" #mandatory
 
     # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
     #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
@@ -43,6 +43,7 @@ license="GNU GPLv3"
 
     # The description text for the mod (multi line!) (#mandatory)
     description='''
+    Mod which includes buildings from TeamFortress 2 from Engineer character.
     '''
 
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.

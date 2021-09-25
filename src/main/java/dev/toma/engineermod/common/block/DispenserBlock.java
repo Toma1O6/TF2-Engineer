@@ -54,7 +54,7 @@ public class DispenserBlock extends Block {
             if (tile instanceof ILiquidIronStorage) {
                 ILiquidIronStorage storage = (ILiquidIronStorage) tile;
                 int total = WrenchItem.getIronVolume(stack);
-                int insertTarget = Math.min(total, 250);
+                int insertTarget = Math.min(total, storage.getRequestAmount());
                 int extra = storage.insertIron(insertTarget);
                 int consumed = insertTarget - extra;
                 WrenchItem.consumeIronVolume(stack, consumed);
