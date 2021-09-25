@@ -33,15 +33,45 @@ import java.util.stream.Collectors;
  */
 public class SentryScreen extends CenteredScreen {
 
+    /**
+     * The background image.
+     */
     private static final ResourceLocation BACKGROUND = EngineerMod.createModPath("textures/screen/sentry.png");
+
+    /**
+     * Sentry entity which owns this screen.
+     */
     private final SentryEntity owner;
 
+    /**
+     * Target selector button.
+     */
     private CycleButton<SentryTargetType> buttonTargetType;
+
+    /**
+     * Whitelist text field
+     */
     private TextFieldWidget whitelistInput;
+
+    /**
+     * Whitelist confirmation button for entry addition
+     */
     private Button buttonAddWhitelistEntry;
+
+    /**
+     * Whitelist entry removal button
+     */
     private Button buttonRemoveWhitelistEntry;
+
+    /**
+     * Whitelist display.
+     */
     private ListView<PlayerId> playerIds;
 
+    /**
+     * Constructor
+     * @param owner The owner entity.
+     */
     public SentryScreen(SentryEntity owner) {
         super(owner.getDisplayName());
         this.owner = Objects.requireNonNull(owner);

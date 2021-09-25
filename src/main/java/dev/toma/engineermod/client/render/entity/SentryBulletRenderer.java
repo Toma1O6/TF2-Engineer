@@ -1,39 +1,43 @@
 package dev.toma.engineermod.client.render.entity;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import dev.toma.engineermod.common.entity.SentryBullet;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Matrix3f;
 import net.minecraft.util.math.vector.Matrix4f;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
 
 /**
+ * Bullet renderer. Renders tracer-like bullet.
+ *
  * @author Toma
  * @version 1.0
  */
 public class SentryBulletRenderer extends EntityRenderer<SentryBullet> {
 
-    public static final ResourceLocation NORMAL_ARROW_LOCATION = new ResourceLocation("tf2engineer:textures/entity/projectile.png");
+    /**
+     * The texture path
+     */
+    public static final ResourceLocation LOCATION = new ResourceLocation("tf2engineer:textures/entity/projectile.png");
 
+    /**
+     * Constructor
+     * @param manager Entity rendering manager
+     */
     public SentryBulletRenderer(EntityRendererManager manager) {
         super(manager);
     }
 
     @Override
     public ResourceLocation getTextureLocation(SentryBullet bullet) {
-        return NORMAL_ARROW_LOCATION;
+        return LOCATION;
     }
 
     @Override

@@ -12,14 +12,36 @@ import java.util.function.Consumer;
  */
 public final class GhostTextResponder implements Consumer<String> {
 
+    /**
+     * The ghost text value
+     */
     private final String textEntry;
+
+    /**
+     * Targetted text field
+     */
     private final TextFieldWidget target;
+
+    /**
+     * Value change listener - called when target's value changes
+     */
     private final Consumer<String> responder;
 
+    /**
+     * Constructor with no value change listener
+     * @param textEntry The ghost text
+     * @param target The text field
+     */
     public GhostTextResponder(String textEntry, TextFieldWidget target) {
         this(textEntry, target, s -> {});
     }
 
+    /**
+     * Constructor
+     * @param textEntry The ghost text
+     * @param target The text field
+     * @param responder The value change listener
+     */
     public GhostTextResponder(String textEntry, TextFieldWidget target, Consumer<String> responder) {
         this.textEntry = textEntry;
         this.target = target;

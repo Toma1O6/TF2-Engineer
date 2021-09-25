@@ -28,6 +28,7 @@ import net.minecraftforge.common.Tags;
  */
 public class WrenchContainer extends Container {
 
+    // CONVERSION RATES
     public static final int NUGGET_VOLUME = 20;
     public static final int INGOT_VOLUME = 9 * NUGGET_VOLUME;
     public static final int BLOCK_VOLUME = 9 * INGOT_VOLUME;
@@ -91,12 +92,9 @@ public class WrenchContainer extends Container {
             if (!input.isEmpty()) {
                 Item in = input.getItem();
                 int count = input.getCount();
-                if (in.is(Tags.Items.INGOTS_IRON)) {
-                    WrenchItem.growIronVolume(stack, INGOT_VOLUME * count);
-                } else if (in.is(Tags.Items.NUGGETS_IRON)) {
-                    WrenchItem.growIronVolume(stack, NUGGET_VOLUME * count);
-                } else if (in == Items.IRON_BLOCK) {
-                    WrenchItem.growIronVolume(stack, BLOCK_VOLUME * count);
+                int amount = count * getVolume(in);
+                if (amount > 0) {
+                    WrenchItem.growIronVolume(stack, amount);
                 }
                 if (owner instanceof ServerPlayerEntity) {
                     ServerPlayerEntity serverPlayer = (ServerPlayerEntity) owner;

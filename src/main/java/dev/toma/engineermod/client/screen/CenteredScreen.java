@@ -8,15 +8,31 @@ import net.minecraft.util.text.ITextComponent;
 
 /**
  * Centered screen with optional image background.
+ * Background can be rendered using {@link CenteredScreen#drawBackgroundImage(MatrixStack)}.
  *
  * @author Toma
  * @version 1.0
  */
 public abstract class CenteredScreen extends Screen {
 
+    /**
+     * Screen's left position
+     */
     protected int leftPos;
+
+    /**
+     * Screen's top position
+     */
     protected int topPos;
+
+    /**
+     * Screen's background width
+     */
     protected int imageWidth = 176;
+
+    /**
+     * Screen's background height
+     */
     protected int imageHeight = 166;
 
     /**

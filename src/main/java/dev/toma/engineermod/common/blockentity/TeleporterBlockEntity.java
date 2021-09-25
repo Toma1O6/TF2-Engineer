@@ -21,29 +21,65 @@ import java.util.UUID;
  */
 public class TeleporterBlockEntity extends TileEntity implements ITickableTileEntity {
 
+    /**
+     * Player teleport interval
+     */
     private static final int TELEPORT_INTERVAL = 24;
 
+    /**
+     * Linked position
+     */
     private BlockPos linkedDest;
+
+    /**
+     * Current teleport target
+     */
     private UUID teleportTarget;
+
+    /**
+     * Ticks remaining to teleportation
+     */
     private int teleportTicks = TELEPORT_INTERVAL;
+
+    /**
+     * Ticks before teleporter can start another teleport event
+     */
     private int teleportDelay;
 
+    /**
+     * Constructor
+     * @param type The blockentity type
+     */
     public TeleporterBlockEntity(TileEntityType<?> type) {
         super(type);
     }
 
+    /**
+     * Constructor
+     */
     public TeleporterBlockEntity() {
         this(BlockEntities.TELEPORTER_TYPE.get());
     }
 
+    /**
+     * Unlinks from destination position
+     */
     public void breakLink() {
         linkedDest = null;
     }
 
+    /**
+     * Links destination pos.
+     * @param pos The destination pos
+     */
     public void linkTo(BlockPos pos) {
         linkedDest = pos;
     }
 
+    /**
+     * Requests teleportation for specific player.
+     * @param uuid Player's UUID
+     */
     public void requestTeleportation(UUID uuid) {
         if (!validateOn(uuid)) {
             teleportTarget = uuid;
@@ -83,6 +119,9 @@ public class TeleporterBlockEntity extends TileEntity implements ITickableTileEn
         }
     }
 
+    /**
+     * Tries teleport player. Does some last validations.
+     */
     private void doTeleport() {
         if (!level.isClientSide && linkedDest != null) {
             TileEntity tile = level.getBlockEntity(linkedDest);
@@ -108,6 +147,11 @@ public class TeleporterBlockEntity extends TileEntity implements ITickableTileEn
         }
     }
 
+    /**
+     * Validates that player is standing on this teleporter
+     * @param uuid The player to check
+     * @return If player is standing on this teleporter
+     */
     private boolean validateOn(UUID uuid) {
         if (uuid == null)
             return false;

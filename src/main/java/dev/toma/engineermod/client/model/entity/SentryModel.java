@@ -7,9 +7,9 @@ import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 
 /**
- * Sentry model
+ * Sentry model.
  *
- * @author Toma
+ * @author Model by NotDracon
  * @version 1.0
  */
 public class SentryModel extends EntityModel<SentryEntity> {

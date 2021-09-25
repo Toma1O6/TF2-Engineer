@@ -18,8 +18,17 @@ import net.minecraft.util.text.ITextComponent;
  */
 public class WrenchScreen extends ContainerScreen<WrenchContainer> {
 
+    /**
+     * Background image
+     */
     private static final ResourceLocation BG = EngineerMod.createModPath("textures/screen/wrench.png");
 
+    /**
+     * Constructor
+     * @param container The wrench container
+     * @param inventory Player's inventory
+     * @param component Display name of this screen
+     */
     public WrenchScreen(WrenchContainer container, PlayerInventory inventory, ITextComponent component) {
         super(container, inventory, component);
 
@@ -40,6 +49,15 @@ public class WrenchScreen extends ContainerScreen<WrenchContainer> {
         renderLiquidIron(poseStack, leftPos + 134, topPos + 13, 34, 68, getAmount());
     }
 
+    /**
+     * Draws liquid iron progress bar and text information into screen.
+     * @param poseStack The poseStack
+     * @param left Left position
+     * @param top Top position
+     * @param width Width
+     * @param height Height
+     * @param amount Amount of liquid iron
+     */
     private void renderLiquidIron(MatrixStack poseStack, int left, int top, int width, int height, int amount) {
         int h = (int) (height * getFillProgress(amount));
         fillGradient(poseStack, left, top + height - h, left + width, top + height, 0xFFDDDDDD, 0xFF888888);
@@ -48,6 +66,9 @@ public class WrenchScreen extends ContainerScreen<WrenchContainer> {
         font.draw(poseStack, text, left - 10 - tw, top + height - 16, 0x333333);
     }
 
+    /**
+     * @return Liquid iron amount
+     */
     private int getAmount() {
         ItemStack stack = minecraft.player.getMainHandItem();
         if (!(stack.getItem() instanceof WrenchItem))
