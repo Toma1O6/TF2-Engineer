@@ -124,9 +124,20 @@ public class WrenchContainer extends Container {
         }
     }
 
-    private static boolean isValidInput(ItemStack stack) {
-        Item item = stack.getItem();
-        return item == Items.IRON_BLOCK || item.is(Tags.Items.INGOTS_IRON) || item.is(Tags.Items.NUGGETS_IRON);
+    private boolean isValidInput(ItemStack stack) {
+        int amount = getVolume(stack.getItem());
+        return amount > 0 && (WrenchItem.getIronVolume(this.stack) + amount) <= WrenchItem.CAPACITY;
+    }
+
+    private static int getVolume(Item item) {
+        if (item == Items.IRON_BLOCK) {
+            return BLOCK_VOLUME;
+        } else if (item.is(Tags.Items.INGOTS_IRON)) {
+            return INGOT_VOLUME;
+        } else if (item.is(Tags.Items.NUGGETS_IRON)) {
+            return NUGGET_VOLUME;
+        }
+        return 0;
     }
 
     private static class ContainerListener implements IContainerListener {

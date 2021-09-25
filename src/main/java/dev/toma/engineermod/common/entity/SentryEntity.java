@@ -18,12 +18,14 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
@@ -145,6 +147,15 @@ public class SentryEntity extends MobEntity implements ILiquidIronStorage, IEnti
         return 300 - liquidIron + healDiff * 100;
     }
 
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+        if (!level.isClientSide) {
+            ItemEntity entity = new ItemEntity(level, getX(), getY(), getZ(), new ItemStack(Items.IRON_BLOCK));
+            level.addFreshEntity(entity);
+        }
+    }
+
     public boolean hasAmmo() {
         return liquidIron >= 2;
     }
@@ -167,7 +178,7 @@ public class SentryEntity extends MobEntity implements ILiquidIronStorage, IEnti
     }
 
     public void playShootSound() {
-        level.playSound(null, this, Sounds.SENTRY_SHOOT, SoundCategory.MASTER, 1.0F, 1.0F);
+        level.playSound(null, this, Sounds.SENTRY_SHOOT, SoundCategory.MASTER, 5.0F, 1.0F);
     }
 
     public boolean isOwner(UUID uuid) {
