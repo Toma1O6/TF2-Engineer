@@ -13,6 +13,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.util.Constants;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -130,7 +131,7 @@ public class TeleporterBlockEntity extends TileEntity implements ITickableTileEn
             }
             TeleporterBlockEntity teleporter = (TeleporterBlockEntity) tile;
             boolean canTp = true;
-            if (!teleporter.linkedDest.equals(worldPosition)) {
+            if (!Objects.equals(worldPosition, teleporter.linkedDest)) {
                 teleporter.breakLink();
                 this.breakLink();
                 canTp = false;
