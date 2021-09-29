@@ -2,6 +2,7 @@ package dev.toma.engineermod.common.container;
 
 import dev.toma.engineermod.common.init.Containers;
 import dev.toma.engineermod.common.item.WrenchItem;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -92,17 +93,26 @@ public class WrenchContainer extends Container {
             if (!input.isEmpty()) {
                 Item in = input.getItem();
                 int count = input.getCount();
-                int amount = count * getVolume(in);
-                if (amount > 0) {
+                int amount = getVolume(in);
+                int volume = WrenchItem.getIronVolume(stack);
+                while (count > 0 && volume + amount <= WrenchItem.CAPACITY) {
+                    --count;
+                    volume += amount;
                     WrenchItem.growIronVolume(stack, amount);
+                    simpleInventory.getItem(0).shrink(1);
                 }
                 if (owner instanceof ServerPlayerEntity) {
                     ServerPlayerEntity serverPlayer = (ServerPlayerEntity) owner;
                     forceNbtUpdate(serverPlayer.connection);
                     serverPlayer.connection.send(new SSetSlotPacket(containerId, 0, slots.get(0).getItem().copy()));
+                    if (!simpleInventory.getItem(0).isEmpty()) {
+                        ItemEntity entity = new ItemEntity(owner.level, owner.getX(), owner.getY(0.7), owner.getZ(), new ItemStack(in, count));
+                        entity.setPickUpDelay(30);
+                        owner.level.addFreshEntity(entity);
+                    }
                 }
+                simpleInventory.clearContent();
             }
-            simpleInventory.clearContent();
         } else {
             InventoryHelper.dropContents(owner.level, owner, simpleInventory);
         }

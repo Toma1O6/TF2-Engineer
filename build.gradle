@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0.3'
+version = '1.0.4'
 group = 'dev.toma.tf2engineer' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'tf2-engineer-buildings-mod'
 
